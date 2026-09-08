@@ -1,0 +1,44 @@
+command to install conda
+curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh
+conda --version
+
+# Environment setup
+conda create -n hw2 python=3.11 -y
+conda activate hw2
+pip install -r requirements.txt  # conda install will not work most often
+cp .env.example .env #copy .env.example to .env
+
+# conda envs can be found at location - /Users/id/Applications/miniconda3 (where miniconda is installed)
+# python venv is not listed in one place how conda organises. Its present at project folder location.
+python -m venv myEnv - command to create venv using python
+find ~ -maxdepth 3 -iname "myEnv" -type d # when created a venv called myEnv somewhere under your home folder but don't remember exactly where.
+
+conda terms n condition fix
+conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+conda update -n base conda
+
+running the project
+python scripts/check_env.py
+python scripts/build_index.py --force
+python scripts/evaluate_dev.py
+python -m support_agent.app
+grep -rn "TODO [0-9]" support_agent/
+
+checking installed packages
+conda list -n hw2
+conda env list
+pip list
+pip freeze
+
+fixing wrong python being used after making environment active
+which python
+which -a python
+which -a python3
+type -a python
+conda info --envs
+echo $CONDA_PREFIX
+echo $CONDA_DEFAULT_ENV
+echo $PATH
+
+
